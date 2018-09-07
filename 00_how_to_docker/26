@@ -1,0 +1,9 @@
+#!/bin/bash
+
+docker service create \
+--replicas 2 \
+--name=engineering-bay \
+--network=overmind \
+-e OC_USERNAME=coco \
+-e OC_PASSWD=titi \
+42school/engineering-bay
