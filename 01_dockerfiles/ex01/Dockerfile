@@ -1,31 +1,26 @@
 FROM debian
 
-# ENV TS3SERVER_LICENSE="accept" # needed for Teamspeak
+# otherwise ts3 doesn't start
+ENV TS3SERVER_LICENSE="accept"
+# or add `-e TS3SERVER_LICENSE="accept"` when docker run
 
-#RUN useradd ts3
-#USER ts3 # maybe not necesary
-# ? mkdir /home/ts3 ?
-#WORKDIR=/home/ts3
+RUN useradd ts3
+WORKDIR /home/ts3
 
-# download, unzip, clean go inside the dir
+# download, unzip and clean
 RUN apt-get update && apt-get install -y wget bzip2 \
 	&& wget http://dl.4players.de/ts/releases/3.4.0/teamspeak3-server_linux_amd64-3.4.0.tar.bz2 \
 	&& tar -xjvf teamspeak3-server_linux_amd64-3.4.0.tar.bz2 \
 	&& rm teamspeak3-server_linux_amd64-3.4.0.tar.bz2
-#	&& cd teamspeak3-server_linux_amd64
 
-#EXPOSE 9987/udp
-#EXPOSE 30033
-#EXPOSE 10011
+# TCP if not specified
+EXPOSE 9987/udp
+EXPOSE 30033
+EXPOSE 10011
 
-#VOLUME ts3-data:/home/ts3/data #maybe not necesary
+USER ts3
 
-# sh teamspeak3-server_linux_amd64/ts3server_minimal_runscript.sh
-#./ts3server_startscript.sh start
+# Container runs as an executable
+ENTRYPOINT ["sh", "teamspeak3-server_linux_amd64/ts3server_minimal_runscript.sh"]
 
-#CMD ["echo", "server started"]
-
-# faire tourner le contenainer
-# tester sur le navigateur ou en CLI pour envoyer des messages
-# essayer d'enlever les ports et de les déclarer au run
-# see the log : docker log <container_name>
+# Check the log with `docker logs <container_name>`
