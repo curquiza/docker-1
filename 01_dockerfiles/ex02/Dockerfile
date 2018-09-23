@@ -10,8 +10,11 @@ RUN apt-get -y update \
 	&& gem install rails \
 	&& gem install bundler \
 	&& bundle install \
-	&& rails db:migrate
+	&& rails db:migrate db:seed
 
-# run l'autre dockerfile
-# rails db:create ?
-# rails db:seed -> faire un seed.rb
+RUN docker build . -f Dockerfile_given -t ft-rails:running \
+	&& docker run -d -p 3000:3000 --name=ft-rails-run ft-rails:running
+
+# Run the first Dockerfile :
+# docker build . -t ft-rails:on-build
+# docker run -d --name ft-rails-build ft-rails:on-build
