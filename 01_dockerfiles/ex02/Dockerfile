@@ -19,4 +19,4 @@ ONBUILD RUN bundle install \
 # docker build . -f Dockerfile-son -t ft-rails:running
 
 # Run container :
-# docker run -d -p 3000:3000 -name=first-rails-app ft-rails:running
+# docker run -d -p 3000:3000 --name=first-rails-app ft-rails:running
