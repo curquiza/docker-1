@@ -1,20 +1,21 @@
 FROM ruby:2.4-jessie
 
-WORKDIR /opt/app/
-
-ADD Dockerfile_given .
-ADD blog/ .
-
 RUN apt-get -y update \
 	&& apt-get install sqlite3 \
-	&& gem install rails \
-	&& gem install bundler \
-	&& bundle install \
+	&& gem install rails
+
+ADD blog/ /opt/app
+
+ONBUILD WORKDIR /opt/app/
+
+ONBUILD RUN bundle install \
 	&& rails db:migrate db:seed
 
-RUN docker build . -f Dockerfile_given -t ft-rails:running \
-	&& docker run -d -p 3000:3000 --name=ft-rails-run ft-rails:running
-
-# Run the first Dockerfile :
+# Build ft-rails:on-build image :
 # docker build . -t ft-rails:on-build
-# docker run -d --name ft-rails-build ft-rails:on-build
+
+# Build image from the Dockerfile-son :
+# docker build -f Dockerfile-son -t ft-rails:running
+
+# Run container :
+# docker run -d -p 3000:3000 -name=first-rails-app ft-rails:running
