@@ -1,1 +1,12 @@
-docker run -d -p 5000:80 --restart unless-stopped --name overlord nginx
+# test
+
+docker run -d \
+    -p 5000:80 \
+    --restart unless-stopped \
+    --name overlord \
+    nginx:1.17.2-alpine
+
+# Intéressant :
+# - Démarrer un shell dans le conteneur overlord : docker exec -it overlord sh
+#   Faire un : ps aux -> Voir nginx qui tourne
+# - Ou plus simplement faire directement : docker exec -it overlord ps aux

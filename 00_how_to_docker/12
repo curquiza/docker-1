@@ -1,8 +1,11 @@
 #!/bin/bash
 docker run -d \
---restart unless-stopped \
---name spawning-pool \
--e MYSQL_ROOT_PASSWORD=Kerrigan \
--e MYSQL_DATABASE=zerglings \
--v hatchery:/var/lib/mysql \
-mysql
+    --restart on-failure \
+    --name spawning-pool \
+    -e MYSQL_ROOT_PASSWORD=Kerrigan \
+    -e MYSQL_DATABASE=zerglings \
+    -v hatchery:/var/lib/mysql \
+mysql:8.0 \
+
+# Intéressant : se conencter sur la database, via la commande my_sql
+# docker exec -ti spawning-pool mysql -u root -p zerglings
