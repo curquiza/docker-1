@@ -1,6 +1,14 @@
-#!/bin/bash
 docker run -d \
     --name=lair \
     -p 8080:80 \
     --link=spawning-pool:mysql \
 wordpress:5.2
+
+# Checker http://<ip-Char>:8080
+
+# Pour être sur que ca marche
+# - supprimer les containers mysql/wordpress
+# - supprimer les images mysql/wordpress
+# - supprimer et creer de nouveau le volume hatchery
+# - lancer mysql, checker les log jusqu'à que le container soit "prêt" (on peut aussi voir avec docker ps que le container ne resteart pas)
+# - lancer wordpress

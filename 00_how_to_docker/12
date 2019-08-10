@@ -1,11 +1,12 @@
-#!/bin/bash
 docker run -d \
     --restart on-failure \
     --name spawning-pool \
     -e MYSQL_ROOT_PASSWORD=Kerrigan \
     -e MYSQL_DATABASE=zerglings \
     -v hatchery:/var/lib/mysql \
-mysql:8.0 \
+mysql:5.7
 
-# Intéressant : se conencter sur la database, via la commande my_sql
-# docker exec -ti spawning-pool mysql -u root -p zerglings
+# Utile : se conencter sur la database, via la commande my_sql
+# $> docker exec -ti spawning-pool mysql -u root -p zerglings
+
+# Utilisation d'une ancienne version de mysql pour la connection avec le WP de l'exo 14
