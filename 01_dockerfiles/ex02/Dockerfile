@@ -20,3 +20,6 @@ ONBUILD RUN bundle install \
 
 # Run container :
 # docker run -d -p 3000:3000 --name=first-rails-app ft-rails:running
+
+# Check :
+# <ip-Char>:3000

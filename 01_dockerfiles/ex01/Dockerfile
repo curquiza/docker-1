@@ -1,4 +1,4 @@
-FROM debian
+FROM debian:8
 
 # otherwise ts3 doesn't start
 ENV TS3SERVER_LICENSE="accept"
@@ -23,4 +23,8 @@ USER ts3
 # Container runs as an executable
 ENTRYPOINT ["sh", "teamspeak3-server_linux_amd64/ts3server_minimal_runscript.sh"]
 
-# Check the log with `docker logs <container_name>`
+# $> docker build -t ex01 .
+# $> docker run -d --rm --name ts3 -p 9987:9987/udp -p 10011:10011 -p 30033:30033 ex01
+
+# Check the log :
+# $> docker logs -f ts3
