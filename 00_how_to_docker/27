@@ -1,1 +1,4 @@
 docker service logs -f $(docker service ps engineering-bay -q -f "name=engineering-bay.1")
+
+# Utile :
+# $> docker service logs -f (docker service ps marines -q -f "name=marines.1")
