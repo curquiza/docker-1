@@ -1,1 +1,4 @@
 docker service update marines --replicas 20
+
+# Utiles :
+# $> docker service ps marines

@@ -1,1 +1,4 @@
+# Supprimer Docker For Mac
+# Puis : brew install docker docker-machine
+
 docker-machine create --driver virtualbox Char
